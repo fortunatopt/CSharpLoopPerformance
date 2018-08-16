@@ -12,6 +12,7 @@ namespace LoopPerformance
 
         static void Main(string[] args)
         {
+            Console.Title = "Loop Performance";
             string type = "";
             Console.Write("Object or Integers (o or i)?: ");
             type = Console.ReadLine();
