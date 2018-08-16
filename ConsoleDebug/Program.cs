@@ -22,36 +22,13 @@ namespace ConsoleDebug
                 type = "i";
             }
 
-            long iterator = 0;
-            string l = "";
-
             if (type == "i")
             {
-                Console.Write($"How many loops ( <= {iterator} )?: ");
-                l = Console.ReadLine();
-                bool test = long.TryParse(l, out iterator);
-                if (iterator == 0 || iterator > 100000000)
-                    iterator = 100000000;
-
-                Console.WriteLine();
-                Console.WriteLine($"We will loop {iterator} times");
-                Console.WriteLine();
-
-                iterator.IntLoop();
+                IntegerLoop.IntLoop();
             }
             else
-            {                
-                Console.Write($"How many loops ( <= {iterator} )?: ");
-                l = Console.ReadLine();
-                bool test = long.TryParse(l, out iterator);
-                if (iterator == 0 || iterator > 10000000)
-                    iterator = 10000000;
-
-                Console.WriteLine();
-                Console.WriteLine($"We will loop {iterator} times");
-                Console.WriteLine();
-
-                iterator.ObjLoop();
+            {
+                ObjectLoop.ObjLoop();
             }
 
             Console.WriteLine();

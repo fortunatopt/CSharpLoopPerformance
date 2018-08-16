@@ -9,8 +9,21 @@ namespace ConsoleDebug
 {
     public static class ObjectLoop
     {
-        public static void ObjLoop(this long iterator)
+        public static void ObjLoop()
         {
+            long iterator = 10000000;
+            string l = "";
+
+            Console.Write($"How many loops ( <= {iterator} )?: ");
+            l = Console.ReadLine();
+            bool test = long.TryParse(l, out iterator);
+            if (iterator == 0 || iterator > 10000000)
+                iterator = 10000000;
+
+            Console.WriteLine();
+            Console.WriteLine($"We will loop {iterator} times");
+            Console.WriteLine();
+
             List<Output> output = new List<Output>();
 
             List<LoopObject> rows = PopulateLoop(iterator);

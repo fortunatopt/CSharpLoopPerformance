@@ -9,8 +9,22 @@ namespace ConsoleDebug
 {
     public static class IntegerLoop
     {
-        public static void IntLoop(this long iterator)
+        public static void IntLoop()
         {
+
+            long iterator = 100000000;
+            string l = "";
+
+            Console.Write($"How many loops ( <= {iterator} )?: ");
+            l = Console.ReadLine();
+            bool test = long.TryParse(l, out iterator);
+            if (iterator == 0 || iterator > 100000000)
+                iterator = 100000000;
+
+            Console.WriteLine();
+            Console.WriteLine($"We will loop {iterator} times");
+            Console.WriteLine();
+
             List<Output> output = new List<Output>();
 
             List<int> rows = PopulateLoop(iterator);
