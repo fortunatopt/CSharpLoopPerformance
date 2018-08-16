@@ -9,8 +9,15 @@ namespace ConsoleDebug
 {
     class Program
     {
+        public class Output
+        {
+            public string Title { get; set; }
+            public long Milliseconds { get; set; }
+        }
         static void Main(string[] args)
         {
+            List<Output> output = new List<Output>();
+
             string l = "";
             long iterator = 0;
             Console.Write("How many loops ( <= 100000000 )?: ");
@@ -28,37 +35,40 @@ namespace ConsoleDebug
             sw.Start();
             IterateForeachOnList(rows);
             sw.Stop();
-            Console.WriteLine(String.Format("| {0,50} | {1,20} |", "Iterate Foreach On List", sw.ElapsedTicks.ToString("N0")));
-            
+            output.Add(new Output { Title = "Iterate Foreach On List", Milliseconds = sw.ElapsedTicks });
+                        
             sw = new Stopwatch();
             sw.Start();
             IterateForOnListWithoutCountOptimization(rows);
             sw.Stop();
-            Console.WriteLine(String.Format("| {0,50} | {1,20} |", "Iterate For On List Without Count Optimization", sw.ElapsedTicks.ToString("N0")));
+            output.Add(new Output { Title = "Iterate For On List Without Count Optimization", Milliseconds = sw.ElapsedTicks });
             
             sw = new Stopwatch();
             sw.Start();
             IterateForOnListWithCountOptimization(rows);
             sw.Stop();
-            Console.WriteLine(String.Format("| {0,50} | {1,20} |", "Iterate For On List With Count Optimization", sw.ElapsedTicks.ToString("N0")));
+            output.Add(new Output { Title = "Iterate For On List With Count Optimization", Milliseconds = sw.ElapsedTicks });
             
             sw = new Stopwatch();
             sw.Start();
             IterateForeachOnArray(rowsArray);
             sw.Stop();
-            Console.WriteLine(String.Format("| {0,50} | {1,20} |", "Iterate Foreach On Array", sw.ElapsedTicks.ToString("N0")));
+            output.Add(new Output { Title = "Iterate Foreach On Array", Milliseconds = sw.ElapsedTicks });
             
             sw = new Stopwatch();
             sw.Start();
             IterateForOnArrayWithoutCountOptimization(rowsArray);
             sw.Stop();
-            Console.WriteLine(String.Format("| {0,50} | {1,20} |", "Iterate For On Array Without Count Optimization", sw.ElapsedTicks.ToString("N0")));
+            output.Add(new Output { Title = "Iterate For On Array Without Count Optimization", Milliseconds = sw.ElapsedTicks });
             
             sw = new Stopwatch();
             sw.Start();
             IterateForOnArrayWithCountOptimization(rowsArray);
             sw.Stop();
-            Console.WriteLine(String.Format("| {0,50} | {1,20} |", "Iterate For On Array With Count Optimization", sw.ElapsedTicks.ToString("N0")));
+            output.Add(new Output { Title = "Iterate For On Array With Count Optimization", Milliseconds = sw.ElapsedTicks });
+            
+            foreach (var o in output)
+                Console.WriteLine(String.Format("| {0,50} | {1,20} |", o.Title, o.Milliseconds.ToString("N0")));
 
             Console.WriteLine();
             Console.Write("Press enter...you are done");
