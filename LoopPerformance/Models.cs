@@ -13,7 +13,15 @@ namespace LoopPerformance
     }
     public class LoopObject
     {
-        public string Key { get; set; }
-        public string Value { get; set; }
+        public string prop0 { get; set; }
+        public string prop1 { get; set; }
+        public string prop2 { get; set; }
+        public string prop3 { get; set; }
+        public string prop4 { get; set; }
+        public string prop5 { get; set; }
+        public string prop6 { get; set; }
+        public string prop7 { get; set; }
+        public string prop8 { get; set; }
+        public string prop9 { get; set; }
     }
 }

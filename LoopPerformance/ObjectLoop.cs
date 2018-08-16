@@ -11,14 +11,14 @@ namespace LoopPerformance
     {
         public static void ObjLoop()
         {
-            long iterator = 10000000;
+            long iterator = 1000000;
             string l = "";
 
             Console.Write($"How many loops ( <= {iterator} )?: ");
             l = Console.ReadLine();
             bool test = long.TryParse(l, out iterator);
-            if (iterator == 0 || iterator > 10000000)
-                iterator = 10000000;
+            if (iterator == 0 || iterator > 1000000)
+                iterator = 1000000;
 
             Console.WriteLine();
             Console.WriteLine($"We will loop {iterator} times");
@@ -126,14 +126,23 @@ namespace LoopPerformance
         {
             List<LoopObject> objs = new List<LoopObject>();
             for (int i = 0; i < rows; i++)
-                objs.Add(new LoopObject { Key = "Key " + i.ToString(), Value = $"Value = " + i.ToString() });
+                objs.Add(new LoopObject {
+                    prop0 = "This is my data " + i,
+                    prop1 = "This is my data " + i,
+                    prop2 = "This is my data " + i,
+                    prop3 = "This is my data " + i,
+                    prop4 = "This is my data " + i,
+                    prop5 = "This is my data " + i,
+                    prop6 = "This is my data " + i,
+                    prop7 = "This is my data " + i,
+                    prop8 = "This is my data " + i,
+                    prop9 = "This is my data " + i
+                });
             return objs;
         }
         static LoopObject[] PopulateArray(long rows)
         {
-            List<LoopObject> objs = new List<LoopObject>();
-            for (int i = 0; i < rows; i++)
-                objs.Add(new LoopObject { Key = $"Key {i}", Value = $"Value = {i}" });
+            List<LoopObject> objs = PopulateLoop(rows);            
             return objs.ToArray();
         }
 
