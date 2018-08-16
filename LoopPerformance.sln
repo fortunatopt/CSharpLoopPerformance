@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopPerformance", "ConsoleDebug\LoopPerformance.csproj", "{D4058A3D-65A3-4D0D-87DB-5614A5D3BE8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopPerformance", "LoopPerformance\LoopPerformance.csproj", "{D4058A3D-65A3-4D0D-87DB-5614A5D3BE8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
