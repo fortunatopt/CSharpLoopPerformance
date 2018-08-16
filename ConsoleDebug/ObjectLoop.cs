@@ -30,43 +30,97 @@ namespace ConsoleDebug
             LoopObject[] rowsArray = PopulateArray(iterator);
             Stopwatch sw = new Stopwatch();
 
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+            output.Add(new Output { Title = "List Iteration", Time = "Ticks" });
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+
             sw.Start();
             IterateForeachOnList(rows);
             sw.Stop();
-            output.Add(new Output { Title = "Iterate Foreach On List", Milliseconds = sw.ElapsedTicks });
+            output.Add(new Output { Title = "Iterate Foreach On List", Time = sw.ElapsedTicks.ToString("N0") });
 
             sw = new Stopwatch();
             sw.Start();
             IterateForOnListWithoutCountOptimization(rows);
             sw.Stop();
-            output.Add(new Output { Title = "Iterate For On List Without Count Optimization", Milliseconds = sw.ElapsedTicks });
+            output.Add(new Output { Title = "Iterate For On List Without Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
 
             sw = new Stopwatch();
             sw.Start();
             IterateForOnListWithCountOptimization(rows);
             sw.Stop();
-            output.Add(new Output { Title = "Iterate For On List With Count Optimization", Milliseconds = sw.ElapsedTicks });
+            output.Add(new Output { Title = "Iterate For On List With Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
+
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+            output.Add(new Output { Title = "Parallel List Iteration", Time = "Ticks" });
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+
+            sw = new Stopwatch();
+            sw.Start();
+            IterateParallelForeachOnList(rows);
+            sw.Stop();
+            output.Add(new Output { Title = "Iterate Parallel Foreach On List", Time = sw.ElapsedTicks.ToString("N0") });
+
+            sw = new Stopwatch();
+            sw.Start();
+            IterateParallelForOnListWithoutCountOptimization(rows);
+            sw.Stop();
+            output.Add(new Output { Title = "Iterate Parallel For On List Without Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
+
+            sw = new Stopwatch();
+            sw.Start();
+            IterateParallelForOnListWithCountOptimization(rows);
+            sw.Stop();
+            output.Add(new Output { Title = "Iterate Parallel For On List With Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
+
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+            output.Add(new Output { Title = "Array Iteration", Time = "Ticks" });
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
 
             sw = new Stopwatch();
             sw.Start();
             IterateForeachOnArray(rowsArray);
             sw.Stop();
-            output.Add(new Output { Title = "Iterate Foreach On Array", Milliseconds = sw.ElapsedTicks });
+            output.Add(new Output { Title = "Iterate Foreach On Array", Time = sw.ElapsedTicks.ToString("N0") });
 
             sw = new Stopwatch();
             sw.Start();
             IterateForOnArrayWithoutCountOptimization(rowsArray);
             sw.Stop();
-            output.Add(new Output { Title = "Iterate For On Array Without Count Optimization", Milliseconds = sw.ElapsedTicks });
+            output.Add(new Output { Title = "Iterate For On Array Without Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
 
             sw = new Stopwatch();
             sw.Start();
             IterateForOnArrayWithCountOptimization(rowsArray);
             sw.Stop();
-            output.Add(new Output { Title = "Iterate For On Array With Count Optimization", Milliseconds = sw.ElapsedTicks });
+            output.Add(new Output { Title = "Iterate For On Array With Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
+
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+            output.Add(new Output { Title = "Parallel Array Iteration", Time = "Ticks" });
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+
+            sw = new Stopwatch();
+            sw.Start();
+            IterateParallelForeachOnArray(rowsArray);
+            sw.Stop();
+            output.Add(new Output { Title = "Iterate Parallel Foreach On Array", Time = sw.ElapsedTicks.ToString("N0") });
+
+            sw = new Stopwatch();
+            sw.Start();
+            IterateParallelForOnArrayWithoutCountOptimization(rowsArray);
+            sw.Stop();
+            output.Add(new Output { Title = "Iterate Parallel For On Array Without Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
+
+            sw = new Stopwatch();
+            sw.Start();
+            IterateParallelForOnArrayWithCountOptimization(rowsArray);
+            sw.Stop();
+            output.Add(new Output { Title = "Iterate Parallel For On Array With Count Optimization", Time = sw.ElapsedTicks.ToString("N0") });
+            output.Add(new Output { Title = "============================================================", Time = "==================" });
+
 
             foreach (var o in output)
-                Console.WriteLine(String.Format("| {0,50} | {1,20} |", o.Title, o.Milliseconds.ToString("N0")));
+                Console.WriteLine(String.Format("| {0,60} | {1,20} |", o.Title, o.Time));
         }
         static List<LoopObject> PopulateLoop(long rows)
         {
@@ -82,6 +136,7 @@ namespace ConsoleDebug
                 objs.Add(new LoopObject { Key = $"Key {i}", Value = $"Value = {i}" });
             return objs.ToArray();
         }
+
         static void IterateForeachOnList(List<LoopObject> list)
         {
             foreach (var i in list) { LoopObject j = i; }
@@ -95,6 +150,7 @@ namespace ConsoleDebug
             int count = list.Count;
             for (var i = 0; i < count; i++) { LoopObject j = list[i]; }
         }
+
         static void IterateForeachOnArray(LoopObject[] array)
         {
             foreach (var i in array) { LoopObject j = i; }
@@ -107,6 +163,34 @@ namespace ConsoleDebug
         {
             int length = array.Length;
             for (var i = 0; i < length; i++) { LoopObject j = array[i]; }
+        }
+
+        static void IterateParallelForeachOnList(List<LoopObject> list)
+        {
+            Parallel.ForEach(list, i => { LoopObject j = i; });
+        }
+        static void IterateParallelForOnListWithoutCountOptimization(List<LoopObject> list)
+        {
+            Parallel.For(0, list.Count(), i => { LoopObject j = list[i]; });
+        }
+        static void IterateParallelForOnListWithCountOptimization(List<LoopObject> list)
+        {
+            int count = list.Count();
+            Parallel.For(0, count, i => { LoopObject j = list[i]; });
+        }
+
+        static void IterateParallelForeachOnArray(LoopObject[] array)
+        {
+            Parallel.ForEach(array, i => { LoopObject j = i; });
+        }
+        static void IterateParallelForOnArrayWithoutCountOptimization(LoopObject[] array)
+        {
+            Parallel.For(0, array.Count(), i => { LoopObject j = array[i]; });
+        }
+        static void IterateParallelForOnArrayWithCountOptimization(LoopObject[] array)
+        {
+            int count = array.Count();
+            Parallel.For(0, count, i => { LoopObject j = array[i]; });
         }
     }
 }

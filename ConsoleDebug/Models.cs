@@ -9,7 +9,7 @@ namespace ConsoleDebug
     public class Output
     {
         public string Title { get; set; }
-        public long Milliseconds { get; set; }
+        public string Time { get; set; }
     }
     public class LoopObject
     {
